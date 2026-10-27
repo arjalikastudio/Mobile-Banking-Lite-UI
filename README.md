@@ -11,10 +11,42 @@ Designed to deliver a simple, intuitive, and mobile-first banking experience wit
 ## ✨ Preview
 
 🎥 **Live Demo / Video Preview**  
-*(Add your live demo or video preview link here)*
-
+```bash
+https://arjalikastudio.github.io/Mobile-Banking-Lite-UI/
+```
 📸 **Screenshots Preview**  
-*(Add your application screenshots here)*
+<table>
+  <tr>
+    <td align="center">
+      <img src="sc_1.png" width="100%" alt="Home – Clean design and awesome"/><br/>
+      <b>Home</b><br/>
+    </td>
+    <td align="center">
+      <img src="sc_2.png" width="100%" alt="Home – Mutation Menu"/><br/>
+      <b>Mutation Menu</b><br/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="sc_3.png" width="100%" alt="Transfer Menu"/><br/>
+      <b>Transfer Menu</b><br/>
+    </td>
+    <td align="center">
+      <img src="sc_4.png" width="100%" alt="Card Menu"/><br/>
+      <b>Card Menu</b><br/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="sc_5.png" width="100%" alt="Profile UI"/><br/>
+      <b>Profile UI</b><br/>
+    </td>
+    <td align="center">
+      <img src="sc_6.png" width="100%" alt="Transfer UI"/><br/>
+      <b>Transfer UI</b><br/>
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -91,7 +123,7 @@ git clone https://github.com/arjalikastudio/Mobile-Banking-Lite-UI.git
 ### 2️⃣ Navigate to the project directory
 
 ```bash
-cd banklite
+cd Mobile-Banking-Lite-UI
 ```
 
 ### 3️⃣ Run the application
