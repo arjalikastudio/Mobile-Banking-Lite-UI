@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobile Banking Lite (SPA)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: { boxShadow: { soft: "0 12px 40px rgba(15, 23, 42, 0.10)" } }
+      }
+    }
+  </script>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-900">
+  <div class="mx-auto max-w-md min-h-screen flex flex-col">
+    <!-- Top Bar -->
+    <header class="sticky top-0 z-30 bg-slate-50/90 backdrop-blur border-b border-slate-200">
+      <div class="px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-slate-900 text-white flex items-center justify-center shadow-soft select-none">
+            <span class="font-semibold">BL</span>
+          </div>
+          <div class="leading-tight">
+            <div class="text-sm text-slate-500">Mobile Banking Lite</div>
+            <div class="font-semibold" id="topbarTitle">Dashboard</div>
+          </div>
+        </div>
+        <button id="btnBell" class="p-2 rounded-xl hover:bg-slate-100 active:scale-[0.98]" title="Notifikasi">
+          <div class="relative">
+            <span id="notifDot" class="hidden absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0a3 3 0 11-6 0m6 0H9" />
+            </svg>
+          </div>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main class="flex-1 px-4 py-4 pb-24" id="viewRoot"></main>
+
+    <!-- Bottom Nav -->
+    <nav class="fixed bottom-0 left-0 right-0 z-40">
+      <div class="mx-auto max-w-md bg-white border-t border-slate-200">
+        <div class="grid grid-cols-5 px-2 py-2">
+          <button class="navbtn" data-route="#/dashboard" aria-label="Dashboard">
+            <div class="navicon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h4v11H3V10zm7-7h4v18h-4V3zm7 11h4v7h-4v-7z" />
+              </svg>
+            </div>
+            <div class="navtext">Home</div>
+          </button>
+
+          <button class="navbtn" data-route="#/mutasi" aria-label="Mutasi">
+            <div class="navicon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h13M8 12h13M8 17h13M3 7h.01M3 12h.01M3 17h.01" />
+              </svg>
+            </div>
+            <div class="navtext">Mutasi</div>
+          </button>
+
+          <button class="navbtn" data-route="#/transfer" aria-label="Transfer">
+            <div class="navicon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h13M8 12h8m-8 5h13M3 7l2 2 4-4M3 12l2 2 4-4M3 17l2 2 4-4" />
+              </svg>
+            </div>
+            <div class="navtext">Transfer</div>
+          </button>
+
+          <button class="navbtn" data-route="#/card" aria-label="Card">
+            <div class="navicon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h4M6 19h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+              </svg>
+            </div>
+            <div class="navtext">Card</div>
+          </button>
+
+          <button class="navbtn" data-route="#/profile" aria-label="Profile">
+            <div class="navicon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <div class="navtext">Akun</div>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed left-1/2 -translate-x-1/2 bottom-24 z-50 hidden">
+    <div class="px-4 py-3 rounded-2xl bg-slate-900 text-white shadow-soft text-sm" id="toastText">OK</div>
+  </div>
+
+  <!-- Modal Root -->
+  <div id="modalRoot"></div>
+
+  <style>
+    .navbtn { display:flex; flex-direction:column; align-items:center; gap:.15rem; padding:.45rem .25rem; border-radius:1rem; color:#475569; }
+    .navbtn.active { color:#0f172a; background:#f1f5f9; }
+    .navicon { display:flex; align-items:center; justify-content:center; }
+    .navtext { font-size:.72rem; }
+    .chip { padding:.35rem .55rem; border-radius:999px; font-size:.75rem; }
+    .input { width:100%; border-radius:1rem; border:1px solid #e2e8f0; padding:.75rem .9rem; outline:none; background:white; }
+    .input:focus { border-color:#94a3b8; box-shadow: 0 0 0 4px rgba(148,163,184,.18); }
+    .btn { border-radius:1rem; padding:.75rem .95rem; font-weight:600; }
+    .btn-primary { background:#0f172a; color:white; }
+    .btn-primary:hover { background:#111827; }
+    .btn-ghost { background:#f1f5f9; color:#0f172a; }
+    .btn-ghost:hover { background:#e2e8f0; }
+    .card { background:white; border:1px solid #e2e8f0; border-radius:1.25rem; box-shadow: 0 12px 40px rgba(15, 23, 42, 0.06); }
+  </style>
+  <script src="script.js"> </script>
+</body>
+</html>
